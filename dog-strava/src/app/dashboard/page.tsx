@@ -9,7 +9,7 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
           <p className="mt-1 text-sm text-gray-500">
             Welcome back! Track your dog's progress and share their achievements.
           </p>
@@ -35,11 +35,11 @@ export default function DashboardPage() {
               </div>
               <div className="ml-5 w-0 flex-1">
                 <dl>
-                  <dt className="text-sm font-medium text-gray-500 truncate">
+                  <dt className="text-lg font-bold text-gray-900 truncate">
                     Active Training Goals
                   </dt>
                   <dd>
-                    <div className="text-lg font-medium text-gray-900">3</div>
+                    <div className="text-lg font-bold text-orange-700">3</div>
                   </dd>
                 </dl>
               </div>
@@ -49,7 +49,7 @@ export default function DashboardPage() {
             <div className="text-sm">
               <Link
                 href="/dashboard/training"
-                className="font-medium text-primary hover:text-primary-dark"
+                className="font-bold text-primary hover:text-primary-dark"
               >
                 View all
               </Link>
@@ -65,7 +65,7 @@ export default function DashboardPage() {
         <div className="p-6">
           <h2 className="text-base font-semibold text-gray-900">Recent Activity</h2>
           {/* Add activity list here */}
-          <div className="mt-4 text-sm text-gray-500">
+          <div className="mt-4 text-lg text-gray-500">
             No recent activity to show.
           </div>
         </div>

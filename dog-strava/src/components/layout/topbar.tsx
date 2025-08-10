@@ -51,6 +51,20 @@ export default function TopBar() {
                     </a>
                   )}
                 </Menu.Item>
+                {/* made a profile option on the drop down */}
+                <Menu.Item>
+                  {({ active }) => (
+                    <a
+                      href="/profile"
+                      className={cn(
+                        active ? 'bg-gray-50' : '',
+                        'block px-3 py-1 text-sm leading-6 text-gray-900'
+                      )}
+                    >
+                      Profile
+                    </a>
+                  )}
+                </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
                     <button
