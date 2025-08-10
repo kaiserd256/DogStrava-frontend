@@ -1,4 +1,6 @@
 import React from "react";
+import Reactions from "./reactions";
+import Comments from "./comments";
 
 type Activity = {
   type: string;
@@ -44,11 +46,9 @@ export default function PostCard({ post }: { post: Post }) {
       )}
       <div className="flex items-center justify-between mt-4">
         <span className="text-xs text-gray-500">Visibility: {post.visibility}</span>
-        <div className="flex space-x-4">
-          <button className="text-blue-500 hover:underline text-sm">Like</button>
-          <button className="text-blue-500 hover:underline text-sm">Comment</button>
-        </div>
+        <Reactions postId={post.id} />
       </div>
+      <Comments postId={post.id} />
     </div>
   );
 }

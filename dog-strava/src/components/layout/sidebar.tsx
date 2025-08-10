@@ -25,13 +25,12 @@ export default function Sidebar() {
 
     return (
         <div className="flex h-full w-64 flex-col bg-white border-r border-gray-200">
-            <div className="relative h-24 grow-0 flex items-center justify-center">
+            <div className='relative h-24 grow-0 flex items-center justify-center'>
                 <Image
                     src="/paw-print.png"
                     alt="Dog Strava Logo"
-                    fill
-                    className="object-contain"
-                    sizes='(max-width: 96px) 50vw, (max-width: 96px) 33vw, 200px'
+                    width={96}
+                    height={96}
                 />
             </div>
             <nav className="flex flex-1 flex-col px-4 py-4 space-y-1">
