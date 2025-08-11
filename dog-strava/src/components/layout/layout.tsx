@@ -50,7 +50,8 @@ export function Layout({ children }: LayoutProps) {
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  if (!isAuthenticated && isAuthPage) {
+  // If user is not authenticated, only show auth pages without layout
+  if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-background">
         <div className={`transition-opacity duration-200 ${showContent ? 'opacity-100' : 'opacity-0'}`}>

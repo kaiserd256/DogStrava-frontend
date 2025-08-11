@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuthStore } from '@/stores';
@@ -21,6 +22,7 @@ interface LoginFormProps {
 
 export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   const { login, isLoading, error } = useAuthStore();
+  const router = useRouter();
   
   const {
     register,
@@ -31,7 +33,14 @@ export function LoginForm({ onSwitchToRegister }: LoginFormProps) {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    await login(data.email, data.password);
+    try {
+      await login(data.email, data.password);
+      // Redirect to home page after successful login
+      router.push('/');
+    } catch (error) {
+      // Error is already handled by the auth store
+      console.error('Login failed:', error);
+    }
   };
 
   return (
