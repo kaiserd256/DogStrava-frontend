@@ -1,5 +1,6 @@
 // Authentication utilities and Cognito integration
-// TODO: Replace with actual AWS Cognito SDK integration
+import { signIn, signUp, signOut, getCurrentUser, confirmSignUp, resendSignUpCode, resetPassword, confirmResetPassword } from 'aws-amplify/auth';
+import type { SignInInput, SignUpInput } from 'aws-amplify/auth';
 
 export interface CognitoConfig {
   userPoolId: string;
@@ -7,7 +8,7 @@ export interface CognitoConfig {
   region: string;
 }
 
-// Placeholder configuration - replace with actual values
+// Configuration from environment variables
 export const cognitoConfig: CognitoConfig = {
   userPoolId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_ID || '',
   userPoolClientId: process.env.NEXT_PUBLIC_COGNITO_USER_POOL_CLIENT_ID || '',
@@ -66,53 +67,128 @@ export const authUtils = {
   },
 };
 
-// Cognito integration functions (to be implemented)
+// Cognito integration functions using AWS Amplify Auth
 export const cognitoAuth = {
   async signIn(email: string, password: string) {
-    // TODO: Implement AWS Cognito sign in
-    console.log('Cognito sign in:', { email });
-    throw new Error('Cognito integration not yet implemented');
+    try {
+      const signInInput: SignInInput = {
+        username: email,
+        password: password,
+      };
+      
+      const { isSignedIn, nextStep } = await signIn(signInInput);
+      
+      if (isSignedIn) {
+        const user = await getCurrentUser();
+        return {
+          user,
+          isSignedIn,
+          nextStep
+        };
+      }
+      
+      return { isSignedIn, nextStep };
+    } catch (error) {
+      console.error('Cognito sign in error:', error);
+      throw error;
+    }
   },
 
   async signUp(email: string, password: string, username: string, accountType: string) {
-    // TODO: Implement AWS Cognito sign up
-    console.log('Cognito sign up:', { email, username, accountType });
-    throw new Error('Cognito integration not yet implemented');
+    try {
+      const signUpInput: SignUpInput = {
+        username: email,
+        password: password,
+        options: {
+          userAttributes: {
+            email: email,
+            preferred_username: username,
+            'custom:account_type': accountType,
+          },
+        },
+      };
+      
+      const { isSignUpComplete, userId, nextStep } = await signUp(signUpInput);
+      
+      return {
+        isSignUpComplete,
+        userId,
+        nextStep,
+      };
+    } catch (error) {
+      console.error('Cognito sign up error:', error);
+      throw error;
+    }
   },
 
   async signOut() {
-    // TODO: Implement AWS Cognito sign out
-    console.log('Cognito sign out');
-    authUtils.removeAuthToken();
+    try {
+      await signOut();
+      authUtils.removeAuthToken();
+    } catch (error) {
+      console.error('Cognito sign out error:', error);
+      throw error;
+    }
   },
 
   async getCurrentUser() {
-    // TODO: Implement AWS Cognito get current user
-    console.log('Get current Cognito user');
-    throw new Error('Cognito integration not yet implemented');
+    try {
+      const user = await getCurrentUser();
+      return user;
+    } catch (error) {
+      console.error('Get current user error:', error);
+      throw error;
+    }
   },
 
   async confirmSignUp(email: string, code: string) {
-    // TODO: Implement AWS Cognito confirm sign up
-    console.log('Confirm sign up:', { email, code });
-    throw new Error('Cognito integration not yet implemented');
+    try {
+      const { isSignUpComplete, nextStep } = await confirmSignUp({
+        username: email,
+        confirmationCode: code,
+      });
+      
+      return { isSignUpComplete, nextStep };
+    } catch (error) {
+      console.error('Confirm sign up error:', error);
+      throw error;
+    }
   },
 
   async resendConfirmationCode(email: string) {
-    // TODO: Implement AWS Cognito resend confirmation
-    console.log('Resend confirmation:', { email });
-    throw new Error('Cognito integration not yet implemented');
+    try {
+      await resendSignUpCode({
+        username: email,
+      });
+    } catch (error) {
+      console.error('Resend confirmation error:', error);
+      throw error;
+    }
   },
 
   async forgotPassword(email: string) {
-    // TODO: Implement AWS Cognito forgot password
-    console.log('Forgot password:', { email });
-    throw new Error('Cognito integration not yet implemented');
+    try {
+      const { nextStep } = await resetPassword({
+        username: email,
+      });
+      
+      return { nextStep };
+    } catch (error) {
+      console.error('Forgot password error:', error);
+      throw error;
+    }
   },
 
   async confirmPassword(email: string, code: string, newPassword: string) {
-    // TODO: Implement AWS Cognito confirm password reset
-    console.log('Confirm password reset:', { email, code });
-    throw new Error('Cognito integration not yet implemented');
+    try {
+      await confirmResetPassword({
+        username: email,
+        confirmationCode: code,
+        newPassword: newPassword,
+      });
+    } catch (error) {
+      console.error('Confirm password reset error:', error);
+      throw error;
+    }
   },
 };

@@ -8,9 +8,9 @@ import { usePathname } from 'next/navigation';
 
 const navigationItems = [
   { icon: Home, label: 'Home', href: '/' },
-  { icon: Activity, label: 'Activity Feed', href: '/feed' },
+  { icon: Activity, label: 'Activity Feed', href: '/activity' },
   { icon: Dog, label: 'My Dogs', href: '/dogs' },
-  { icon: PlusCircle, label: 'Log Training', href: '/training/new' },
+  { icon: PlusCircle, label: 'Training', href: '/training' },
   { icon: Users, label: 'Following', href: '/following' },
   { icon: Settings, label: 'Settings', href: '/settings' },
 ];
@@ -31,7 +31,7 @@ export function Sidebar() {
           const isActive = pathname === item.href;
           
           return (
-            <Link key={item.href} href={item.href}>
+            <Link key={item.href} href={item.href} prefetch={true}>
               <Button
                 variant={isActive ? 'default' : 'ghost'}
                 className={`w-full justify-start gap-3 ${

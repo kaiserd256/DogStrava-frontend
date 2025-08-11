@@ -26,7 +26,7 @@ interface AppActions {
 
 export const useAppStore = create<AppState & AppActions>((set, get) => ({
   // State
-  sidebarOpen: false,
+  sidebarOpen: true,
   theme: 'system',
   notifications: [],
 

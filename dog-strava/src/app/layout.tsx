@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Layout } from "@/components/layout";
+import "@/lib/cognito-config"; // Initialize Cognito configuration
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
