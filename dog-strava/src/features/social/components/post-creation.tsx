@@ -180,8 +180,8 @@ export function PostCreation() {
               onClick={() => setPostType('general')}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 postType === 'general'
-                  ? 'bg-primary-100 text-primary-700 border border-primary-200'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-primary text-primary-foreground border border-primary'
+                  : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               }`}
             >
               <Smile className="w-4 h-4" />
@@ -191,8 +191,8 @@ export function PostCreation() {
               onClick={() => setPostType('training')}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 postType === 'training'
-                  ? 'bg-primary-100 text-primary-700 border border-primary-200'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-primary text-primary-foreground border border-primary'
+                  : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               }`}
             >
               <Target className="w-4 h-4" />
@@ -202,8 +202,8 @@ export function PostCreation() {
               onClick={() => setPostType('achievement')}
               className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                 postType === 'achievement'
-                  ? 'bg-primary-100 text-primary-700 border border-primary-200'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  ? 'bg-primary text-primary-foreground border border-primary'
+                  : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               }`}
             >
               <Trophy className="w-4 h-4" />
@@ -222,8 +222,8 @@ export function PostCreation() {
                 onClick={() => setSelectedDog(dog)}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg border transition-colors ${
                   selectedDog.id === dog.id
-                    ? 'border-primary-500 bg-primary-50'
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-primary bg-accent'
+                    : 'border-border hover:border-accent-foreground'
                 }`}
               >
                 <Avatar className="w-6 h-6">
@@ -247,15 +247,15 @@ export function PostCreation() {
                 ? `Tell us about ${selectedDog.name}'s training session...`
                 : `Share ${selectedDog.name}'s latest achievement!`
             }
-            className="w-full min-h-[120px] p-3 border border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full min-h-[120px] p-3 border border-input rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
           />
         </div>
 
         {/* Training Session Details */}
         {postType === 'training' && (
-          <div className="p-4 border-t bg-gray-50">
+          <div className="p-4 border-t bg-muted">
             <h4 className="font-medium mb-3 flex items-center gap-2">
-              <Target className="w-4 h-4 text-primary-500" />
+              <Target className="w-4 h-4 text-primary" />
               Training Session Details
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -274,7 +274,7 @@ export function PostCreation() {
                   className="dogstrava-input w-full"
                 />
                 {showCommandSuggestions && (
-                  <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-10 mt-1">
+                  <div className="absolute top-full left-0 right-0 bg-popover border border-border rounded-lg shadow-lg z-10 mt-1">
                     {commandSuggestions
                       .filter(cmd => cmd.toLowerCase().includes(trainingData.command.toLowerCase()))
                       .map((command) => (
@@ -284,7 +284,7 @@ export function PostCreation() {
                             setTrainingData(prev => ({ ...prev, command }))
                             setShowCommandSuggestions(false)
                           }}
-                          className="w-full text-left px-3 py-2 hover:bg-gray-100 first:rounded-t-lg last:rounded-b-lg"
+                          className="w-full text-left px-3 py-2 hover:bg-accent hover:text-accent-foreground first:rounded-t-lg last:rounded-b-lg"
                         >
                           {command}
                         </button>
@@ -332,7 +332,7 @@ export function PostCreation() {
                   className="dogstrava-input w-full"
                 />
                 {showLocationSuggestions && (
-                  <div className="absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-10 mt-1">
+                  <div className="absolute top-full left-0 right-0 bg-popover border border-border rounded-lg shadow-lg z-10 mt-1">
                     {locationSuggestions
                       .filter(loc => loc.toLowerCase().includes(trainingData.location.toLowerCase()))
                       .map((location) => (
@@ -342,9 +342,9 @@ export function PostCreation() {
                             setTrainingData(prev => ({ ...prev, location }))
                             setShowLocationSuggestions(false)
                           }}
-                          className="w-full text-left px-3 py-2 hover:bg-gray-100 first:rounded-t-lg last:rounded-b-lg flex items-center gap-2"
+                          className="w-full text-left px-3 py-2 hover:bg-accent hover:text-accent-foreground first:rounded-t-lg last:rounded-b-lg flex items-center gap-2"
                         >
-                          <MapPin className="w-4 h-4 text-gray-400" />
+                          <MapPin className="w-4 h-4 text-muted-foreground" />
                           {location}
                         </button>
                       ))}
@@ -368,9 +368,9 @@ export function PostCreation() {
 
         {/* Achievement Details */}
         {postType === 'achievement' && (
-          <div className="p-4 border-t bg-gradient-to-r from-warning-50 to-primary-50">
+          <div className="p-4 border-t bg-accent">
             <h4 className="font-medium mb-3 flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-warning-500" />
+              <Trophy className="w-4 h-4 text-primary" />
               Achievement Details
             </h4>
             <div className="space-y-4">
@@ -421,7 +421,7 @@ export function PostCreation() {
                       {command}
                       <button
                         onClick={() => removeCommand(command)}
-                        className="ml-1 hover:bg-gray-300 rounded-full p-0.5"
+                        className="ml-1 hover:bg-accent-foreground/20 rounded-full p-0.5"
                       >
                         <X className="w-3 h-3" />
                       </button>
@@ -436,7 +436,7 @@ export function PostCreation() {
                       <button
                         key={command}
                         onClick={() => addCommand(command)}
-                        className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                        className="text-xs px-2 py-1 bg-muted hover:bg-accent rounded-full transition-colors"
                       >
                         + {command}
                       </button>
@@ -460,7 +460,7 @@ export function PostCreation() {
                   onChange={handleMediaUpload}
                   className="hidden"
                 />
-                <div className="flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm transition-colors">
+                <div className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent rounded-lg text-sm transition-colors">
                   <Camera className="w-4 h-4" />
                   Photo
                 </div>
@@ -472,7 +472,7 @@ export function PostCreation() {
                   onChange={handleMediaUpload}
                   className="hidden"
                 />
-                <div className="flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm transition-colors">
+                <div className="flex items-center gap-1 px-3 py-1.5 bg-muted hover:bg-accent rounded-lg text-sm transition-colors">
                   <Video className="w-4 h-4" />
                   Video
                 </div>
@@ -492,13 +492,13 @@ export function PostCreation() {
                       className="w-full h-24 object-cover rounded-lg"
                     />
                   ) : (
-                    <div className="w-full h-24 bg-gray-200 rounded-lg flex items-center justify-center">
-                      <Video className="w-6 h-6 text-gray-400" />
+                    <div className="w-full h-24 bg-muted rounded-lg flex items-center justify-center">
+                      <Video className="w-6 h-6 text-muted-foreground" />
                     </div>
                   )}
                   <button
                     onClick={() => removeMedia(item.id)}
-                    className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-1 right-1 bg-destructive text-destructive-foreground rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <X className="w-3 h-3" />
                   </button>

@@ -55,21 +55,25 @@
   --color-warning-900: #78350f;
   
   /* Semantic color mappings with better contrast */
-  --color-background: white;
-  --color-foreground: var(--color-gray-900);
-  --color-card: white;
-  --color-card-foreground: var(--color-gray-900);
+  --color-background: #f4f3ee;
+  --color-foreground: #463f3a;
+  --color-primary: #463f3a;
+  --color-primary-foreground: #f4f3ee;
+  --color-card: #f9f9f9;
+  --color-card-foreground: #463f3a;
   --color-popover: white;
   --color-popover-foreground: var(--color-gray-900);
-  --color-muted: var(--color-gray-100);
+  --color-muted: #BCB8B1;
   --color-muted-foreground: var(--color-gray-600); /* Much darker for better contrast */
-  --color-accent: var(--color-gray-100);
-  --color-accent-foreground: var(--color-gray-900);
+  --color-accent: #c2c5aa;
+  --color-accent-foreground: #463f3a;
+  --color-accent-dulled: #ecede5;
+  --color-liked: #cf6484;
   --color-destructive: #ef4444;
   --color-destructive-foreground: white;
-  --color-border: var(--color-gray-200);
-  --color-input: var(--color-gray-200);
-  --color-ring: var(--color-primary-500);
+  --color-border: #bcb8b1;
+  --color-input: #463f3a;
+  --color-ring: #bcb8b1;
 }
 
 @layer base {

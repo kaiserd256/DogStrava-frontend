@@ -68,9 +68,9 @@ export default function DashboardPage() {
                 <h4 className="font-semibold mb-2">Test the Protection:</h4>
                 <ol className="list-decimal list-inside space-y-1 text-sm">
                   <li>Open a new incognito/private browser window</li>
-                  <li>Navigate to <code className="bg-gray-100 px-1 rounded">localhost:3000/dashboard</code></li>
+                  <li>Navigate to <code className="bg-muted px-1 rounded">localhost:3000/dashboard</code></li>
                   <li>You'll be redirected to the login page automatically!</li>
-                  <li>Same happens for <code className="bg-gray-100 px-1 rounded">/activity</code> and <code className="bg-gray-100 px-1 rounded">/dogs</code></li>
+                  <li>Same happens for <code className="bg-muted px-1 rounded">/activity</code> and <code className="bg-muted px-1 rounded">/dogs</code></li>
                 </ol>
               </div>
 

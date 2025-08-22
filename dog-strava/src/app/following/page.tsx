@@ -133,24 +133,22 @@ export default function FollowingPage() {
         </div>
 
         {/* Search */}
-        <Card className="dogstrava-card mb-6">
-          <div className="p-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <input
-                type="text"
-                placeholder="Search users, dogs, locations..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="dogstrava-input pl-10 w-full"
-              />
-            </div>
+        <div className="pb-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Search users, dogs, locations..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="dogstrava-input pl-10 w-full"
+            />
           </div>
-        </Card>
+        </div>
 
-        {/* Tabs */}
-        <div className="border-b mb-6">
-          <div className="flex space-x-8">
+        {/* Filter Tabs */}
+        <div className="sticky top-0 bg-background/95 backdrop-blur-sm border-b z-10 pb-4">
+          <div className="flex space-x-1 bg-muted p-1 rounded-lg">
             {[
               { key: 'following', label: 'Following', count: users.filter(u => u.isFollowing).length },
               { key: 'followers', label: 'Followers', count: 45 }, // Mock count
@@ -159,10 +157,10 @@ export default function FollowingPage() {
               <button
                 key={key}
                 onClick={() => setActiveTab(key as TabType)}
-                className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+                className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   activeTab === key
-                    ? 'border-primary-500 text-primary-600'
-                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300'
+                    ? 'bg-background text-foreground shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {label} ({count})
@@ -172,7 +170,7 @@ export default function FollowingPage() {
         </div>
 
         {/* User List */}
-        <div className="space-y-4">
+        <div className="space-y-4 pt-4">
           {filteredUsers.map((user) => (
             <Card key={user.id} className="dogstrava-card">
               <div className="p-6">

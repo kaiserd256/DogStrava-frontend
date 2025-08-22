@@ -165,7 +165,7 @@ export function TrainingLog() {
         <Card className="dogstrava-card">
           <div className="p-4">
             <div className="flex items-center gap-2">
-              <div className="p-2 bg-primary-100 rounded-lg">
+              <div className="p-2 bg-primary/20 rounded-lg">
                 <Target className="w-5 h-5 text-primary-600" />
               </div>
               <div>

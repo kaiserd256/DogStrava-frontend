@@ -88,8 +88,8 @@ export default function SettingsPage() {
                     onClick={() => setActiveTab(key as SettingsTab)}
                     className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-colors ${
                       activeTab === key
-                        ? 'bg-primary-100 text-primary-700'
-                        : 'text-muted-foreground hover:text-foreground hover:bg-gray-100'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-accent'
                     }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function SettingsPage() {
                           <img src={settings.profile.avatar} alt={settings.profile.name} className="w-full h-full object-cover" />
                         </Avatar>
                         {isEditing && (
-                          <button className="absolute bottom-0 right-0 bg-primary-500 text-white rounded-full p-2 shadow-lg hover:bg-primary-600 transition-colors">
+                          <button className="absolute bottom-0 right-0 bg-primary text-white rounded-full p-2 shadow-lg hover:bg-primary/80 transition-colors">
                             <Camera className="w-3 h-3" />
                           </button>
                         )}
@@ -389,7 +389,7 @@ export default function SettingsPage() {
                           }))}
                           className="sr-only peer"
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                        <div className="w-11 h-6 bg-muted peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/40 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                       </label>
                     </div>
                   </div>
@@ -414,8 +414,8 @@ export default function SettingsPage() {
                       </Button>
                     </div>
 
-                    <div className="p-4 border border-red-200 rounded-lg">
-                      <h4 className="font-medium mb-2 text-red-700">Delete Account</h4>
+                    <div className="p-4 border rounded-lg">
+                      <h4 className="font-medium mb-2">Delete Account</h4>
                       <p className="text-sm text-muted-foreground mb-4">
                         Permanently delete your account and all associated data. This action cannot be undone.
                       </p>
@@ -439,7 +439,7 @@ export default function SettingsPage() {
                   <Button
                     variant="outline"
                     onClick={handleLogout}
-                    className="text-red-600 border-red-300 hover:bg-red-50"
+                    className="text-secondary border-secondary hover:bg-secondary"
                   >
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out

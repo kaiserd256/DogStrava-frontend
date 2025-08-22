@@ -21,7 +21,7 @@ export function Sidebar() {
 
   return (
     <aside 
-      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 transition-all duration-300 z-30 ${
+      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-background border-r border-border transition-all duration-300 z-30 ${
         sidebarOpen ? 'w-64' : 'w-16'
       }`}
     >

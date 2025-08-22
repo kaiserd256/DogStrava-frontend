@@ -10,7 +10,7 @@ export function Header() {
   const { user, logout } = useAuthStore();
 
   return (
-    <header className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 bg-background border-b border-border px-4 py-3 flex items-center justify-between z-50">
       <div className="flex items-center gap-4">
         <Button
           variant="ghost"
@@ -46,8 +46,8 @@ export function Header() {
         </Button>
         
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-            <User className="h-4 w-4 text-gray-600" />
+          <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+            <User className="h-4 w-4 text-muted-foreground" />
           </div>
           <span className="text-sm font-medium">{user?.username}</span>
         </div>

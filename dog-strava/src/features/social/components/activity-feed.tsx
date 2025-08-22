@@ -226,7 +226,7 @@ export function ActivityFeed() {
             {/* Training/Achievement Info */}
             {post.type === 'training' && post.training && (
               <div className="px-4 pb-3">
-                <div className="bg-muted rounded-lg p-3">
+                <div className="bg-accent-dulled rounded-lg p-3">
                   <div className="flex items-center gap-2 mb-2">
                     <Target className="w-4 h-4 text-primary" />
                     <span className="font-medium text-sm">Training Session</span>
@@ -279,7 +279,7 @@ export function ActivityFeed() {
             {/* Media */}
             {post.media && post.media.length > 0 && (
               <div className="px-4 pb-3">
-                <div className="rounded-lg overflow-hidden bg-muted">
+                <div className="rounded-lg overflow-hidden bg-accent-dulled">
                   {post.media[0].type === 'image' ? (
                     <img 
                       src={post.media[0].url} 
@@ -314,7 +314,7 @@ export function ActivityFeed() {
                     onClick={() => handleLike(post.id)}
                     className={`flex items-center space-x-2 text-sm transition-colors ${
                       post.isLiked 
-                        ? 'text-red-500 hover:text-red-600' 
+                        ? 'text-liked hover:text-liked' 
                         : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >

@@ -27,7 +27,7 @@ function LoadingSkeleton() {
 }
 
 export function Layout({ children }: LayoutProps) {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, isHydrated } = useAuthStore();
   const { sidebarOpen } = useAppStore();
   const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(true);
@@ -50,8 +50,47 @@ export function Layout({ children }: LayoutProps) {
     return () => clearTimeout(timer);
   }, [pathname]);
 
-  // If user is not authenticated, only show auth pages without layout
-  if (!isAuthenticated) {
+  // Show loading screen while waiting for auth state to hydrate (but not for auth pages)
+  if (!isHydrated && !isAuthPage) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-pulse text-center">
+          <div className="w-8 h-8 bg-primary rounded-full mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Auth pages: redirect authenticated users to dashboard, show auth for unauthenticated
+  if (isAuthPage) {
+    // If user is authenticated and tries to access auth pages, redirect to dashboard
+    if (isAuthenticated && isHydrated) {
+      if (typeof window !== 'undefined') {
+        window.location.href = '/';
+      }
+      return (
+        <div className="min-h-screen bg-background flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-8 h-8 bg-primary rounded-full mx-auto mb-4 animate-pulse"></div>
+            <p className="text-muted-foreground">Redirecting to dashboard...</p>
+          </div>
+        </div>
+      );
+    }
+    
+    // Show auth pages for unauthenticated users
+    return (
+      <div className="min-h-screen bg-background">
+        <div className={`transition-opacity duration-200 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+          {children}
+        </div>
+      </div>
+    );
+  }
+
+  // If user is not authenticated and not on auth page, redirect to login
+  if (!isAuthenticated && isHydrated) {
     return (
       <div className="min-h-screen bg-background">
         <div className={`transition-opacity duration-200 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
@@ -65,7 +104,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="flex">
+      <div className="flex pt-16">
         <Sidebar />
         <main 
           className={`flex-1 transition-all duration-300 ${

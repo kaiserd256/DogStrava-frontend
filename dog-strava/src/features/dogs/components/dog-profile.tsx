@@ -108,10 +108,10 @@ export function DogProfile() {
   const getLevelBadgeColor = (level: string) => {
     switch (level) {
       case 'Mastered': return 'bg-success-100 text-success-800 border-success-200'
-      case 'Advanced': return 'bg-primary-100 text-primary-800 border-primary-200'
+      case 'Advanced': return 'bg-primary text-primary-foreground border-primary'
       case 'Intermediate': return 'bg-warning-100 text-warning-800 border-warning-200'
-      case 'Learning': return 'bg-gray-100 text-gray-800 border-gray-200'
-      default: return 'bg-gray-100 text-gray-800 border-gray-200'
+      case 'Learning': return 'bg-muted text-muted-foreground border-border'
+      default: return 'bg-muted text-muted-foreground border-border'
     }
   }
 
@@ -145,7 +145,7 @@ export function DogProfile() {
                 <Avatar className="w-24 h-24 border-4 border-white shadow-lg">
                   <img src={mockDog.avatar} alt={mockDog.name} className="w-full h-full object-cover" />
                 </Avatar>
-                <button className="absolute bottom-0 right-0 bg-primary-500 text-white rounded-full p-1.5 shadow-lg hover:bg-primary-600 transition-colors">
+                <button className="absolute bottom-0 right-0 bg-primary text-white rounded-full p-1.5 shadow-lg hover:bg-primary/80 transition-colors">
                   <Camera className="w-3 h-3" />
                 </button>
               </div>
@@ -213,7 +213,7 @@ export function DogProfile() {
               <div className="text-sm text-muted-foreground">Achievements</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-gray-600">{mockDog.stats.followers}</div>
+              <div className="text-2xl font-bold text-muted-foreground">{mockDog.stats.followers}</div>
               <div className="text-sm text-muted-foreground">Followers</div>
             </div>
           </div>
@@ -221,8 +221,8 @@ export function DogProfile() {
       </Card>
 
       {/* Navigation Tabs */}
-      <div className="border-b">
-        <div className="flex space-x-8">
+      <div className="sticky top-0 bg-background/95 backdrop-blur-sm border-b z-10 pb-4">
+        <div className="flex space-x-1 bg-muted p-1 rounded-lg">
           {[
             { key: 'overview', label: 'Overview' },
             { key: 'progress', label: 'Training Progress' },
@@ -232,10 +232,10 @@ export function DogProfile() {
             <button
               key={key}
               onClick={() => setActiveTab(key as TabType)}
-              className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors ${
+              className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 activeTab === key
-                  ? 'border-primary-500 text-primary-600'
-                  : 'border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300'
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               {label}
@@ -355,7 +355,7 @@ export function DogProfile() {
                 {mockDog.recentActivity.map((activity) => (
                   <div key={activity.id} className="flex items-start gap-3 p-3 border rounded-lg">
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                      activity.type === 'training' ? 'bg-primary-100' : 'bg-warning-100'
+                      activity.type === 'training' ? 'bg-primary/20' : 'bg-warning/20'
                     }`}>
                       {activity.type === 'training' ? (
                         <TrendingUp className="w-4 h-4 text-primary-600" />
